@@ -1,6 +1,47 @@
+import { useEffect, useState } from "react";
 import { useGetAdminSettingsQuery, useUpdateAdminSettingsMutation } from "../../store/websiteApi.js";
 import AdminLayout from "../components/AdminLayout.jsx";
 import Loader from "../components/Loader.jsx";
+
+function ImageUploadField({ label, name, currentImage }) {
+  const [previewUrl, setPreviewUrl] = useState("");
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl.startsWith("blob:")) URL.revokeObjectURL(previewUrl);
+    };
+  }, [previewUrl]);
+
+  const imageUrl = previewUrl || currentImage?.url;
+
+  return (
+    <label className="grid content-start gap-3 rounded border border-dashed border-slate-300 p-3 dark:border-slate-700">
+      <span className="text-sm font-semibold">{label}</span>
+      <input
+        accept="image/*"
+        className="block w-full cursor-pointer rounded border bg-white px-3 py-2 text-sm file:mr-3 file:rounded file:border-0 file:bg-primary file:px-3 file:py-2 file:font-semibold file:text-white dark:bg-slate-900"
+        name={name}
+        onChange={(event) => {
+          const file = event.currentTarget.files?.[0];
+          setPreviewUrl(file ? URL.createObjectURL(file) : "");
+        }}
+        type="file"
+      />
+      {imageUrl ? (
+        <div className="flex min-h-28 items-center justify-center rounded bg-slate-100 p-3 dark:bg-slate-900">
+          <img alt={`${label} preview`} className="max-h-28 max-w-full object-contain" src={imageUrl} />
+        </div>
+      ) : (
+        <div className="grid min-h-28 place-items-center rounded bg-slate-100 px-4 text-center text-sm text-slate-500 dark:bg-slate-900 dark:text-slate-400">
+          Choose an image to see its preview here
+        </div>
+      )}
+      <span className="text-xs text-slate-500 dark:text-slate-400">
+        {previewUrl ? "New image preview" : currentImage?.url ? "Current image" : "No image uploaded yet"}
+      </span>
+    </label>
+  );
+}
 
 export default function Settings() {
   const { data, isLoading } = useGetAdminSettingsQuery();
@@ -29,8 +70,8 @@ export default function Settings() {
           <input className="rounded border px-3 py-2" defaultValue={settings?.youtube || ""} name="youtube" placeholder="YouTube URL" />
           <input className="rounded border px-3 py-2" defaultValue={settings?.whatsapp || ""} name="whatsapp" placeholder="WhatsApp" />
           <input className="rounded border px-3 py-2" defaultValue={settings?.googleMapUrl || ""} name="googleMapUrl" placeholder="Google map URL" />
-          <input className="rounded border px-3 py-2" name="logo" type="file" accept="image/*" />
-          <input className="rounded border px-3 py-2" name="favicon" type="file" accept="image/*" />
+          <ImageUploadField currentImage={settings?.logo} label="Website logo" name="logo" />
+          <ImageUploadField currentImage={settings?.favicon} label="Favicon" name="favicon" />
           <textarea className="rounded border px-3 py-2 md:col-span-2" defaultValue={settings?.footerText || ""} name="footerText" placeholder="Footer text" />
           {isSuccess ? <p className="text-sm text-green-700 dark:text-green-300 md:col-span-2">Settings updated successfully.</p> : null}
           <button className="rounded bg-primary px-4 py-2 text-white md:col-span-2 dark:bg-secondary dark:text-primary" disabled={isSaving} type="submit">
