@@ -10,7 +10,7 @@ cp .env.example .env
 npm run dev
 ```
 
-Set `VITE_API_URL` in `.env` to the backend API base URL, for example `http://localhost:5001/api`.
+Set `VITE_API_URL` in `.env` to the backend API base URL, for example `http://localhost:5001/api` for local development. In the frontend Vercel project, set it to `https://tanuenterprise-backend.vercel.app/api`.
 
 ## Build
 

@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getAdminToken } from "../private/services/authStorage.js";
 
-const apiUrl = import.meta.env.VITE_API_URL || "http://localhost:5000/api";
+const apiUrl = import.meta.env.VITE_API_URL || "https://tanuenterprise-backend.vercel.app/api";
 
 function cleanParams(params = {}) {
   return Object.fromEntries(
