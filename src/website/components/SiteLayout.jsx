@@ -2,6 +2,7 @@ import { ArrowRight, Menu, Moon, Sun, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext.jsx";
+import { useGetHomeQuery } from "../../store/websiteApi.js";
 
 const navItems = [
   ["Home", "/"],
@@ -15,6 +16,9 @@ export default function SiteLayout({ children }) {
   const { theme, toggleTheme } = useTheme();
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: homeData } = useGetHomeQuery();
+  const contactPhone = homeData?.data?.settings?.phone || "+91 7489887978";
+  const supportEmail = homeData?.data?.settings?.email;
 
   return (
     <main className="flex min-h-screen flex-col bg-stone-50 text-slate-950 transition-colors dark:bg-slate-950 dark:text-white">
@@ -22,7 +26,7 @@ export default function SiteLayout({ children }) {
         <div className="hidden border-b border-primary/10 bg-primary text-white dark:border-secondary/20 lg:block">
           <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-2 text-xs font-semibold">
             <span>Construction, renovation and interior project delivery</span>
-            <span className="text-secondary">Call: +91 00000 00000</span>
+            <a className="text-secondary" href={`tel:${contactPhone.replace(/[^+\d]/g, "")}`}>Call: {contactPhone}</a>
           </div>
         </div>
 
@@ -144,6 +148,8 @@ export default function SiteLayout({ children }) {
           <div>
             <h3 className="font-semibold">Contact</h3>
             <div className="mt-3 grid gap-2 text-sm text-slate-300">
+              {contactPhone ? <a href={`tel:${contactPhone.replace(/[^+\d]/g, "")}`}>{contactPhone}</a> : null}
+              {supportEmail ? <a href={`mailto:${supportEmail}`}>{supportEmail}</a> : null}
               <Link to="/contact">Contact Us</Link>
               <Link to="/admin-login">Admin Login</Link>
             </div>

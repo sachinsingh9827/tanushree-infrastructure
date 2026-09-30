@@ -168,7 +168,7 @@ export const websiteApi = createApi({
         method: "PUT",
         body: formData
       }),
-      invalidatesTags: ["Settings"]
+      invalidatesTags: ["Settings", "Home"]
     })
   })
 });
