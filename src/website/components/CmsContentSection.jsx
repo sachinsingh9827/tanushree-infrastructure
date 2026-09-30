@@ -1,3 +1,5 @@
+import { applyBrandName } from "../utils/brandContent.js";
+
 export default function CmsContentSection({ content, isLoading }) {
   if (isLoading) {
     return (
@@ -17,7 +19,7 @@ export default function CmsContentSection({ content, isLoading }) {
     <section className="mx-auto max-w-6xl px-4 pt-8">
       <article
         className="cms-content rounded-lg bg-white p-6 leading-7 text-slate-700 shadow transition-colors dark:bg-slate-900 dark:text-slate-200"
-        dangerouslySetInnerHTML={{ __html: content }}
+        dangerouslySetInnerHTML={{ __html: applyBrandName(content) }}
       />
     </section>
   );
