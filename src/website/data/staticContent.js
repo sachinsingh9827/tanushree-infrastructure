@@ -1,16 +1,16 @@
 export const fallbackAboutPage = {
   title: "Construction work planned with discipline and delivered with care.",
   seoDescription:
-    "tanuenterprise manages residential, commercial and renovation projects with practical execution, clear communication and reliable timelines.",
+    "Tanushree Infrastructure manages residential, commercial and renovation projects with practical execution, clear communication and reliable timelines.",
   content:
-    "<h2>About tanuenterprise</h2><p>tanuenterprise is focused on dependable construction delivery for residential, commercial, renovation and interior projects.</p><p>Our work style is built around clear planning, site coordination, quality materials and transparent updates, so every project can move with confidence from concept to completion.</p><h3>What We Value</h3><ul><li>Reliable project timelines and communication</li><li>Practical execution with attention to finishing details</li><li>Long-term trust with every client and site partner</li></ul>"
+    "<h2>About Tanushree Infrastructure</h2><p>Tanushree Infrastructure is focused on dependable construction delivery for residential, commercial, renovation and interior projects.</p><p>Our work style is built around clear planning, site coordination, quality materials and transparent updates, so every project can move with confidence from concept to completion.</p><h3>What We Value</h3><ul><li>Reliable project timelines and communication</li><li>Practical execution with attention to finishing details</li><li>Long-term trust with every client and site partner</li></ul>"
 };
 
 export const fallbackHomeContent = {
   eyebrow: "Builder and Construction Portfolio",
   title: "Practical construction work with a CMS-ready website.",
   description:
-    "tanuenterprise supports residential, commercial and renovation projects with dependable planning, clear communication and careful execution.",
+    "Tanushree Infrastructure supports residential, commercial and renovation projects with dependable planning, clear communication and careful execution.",
   image: "https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1200&q=80",
   content:
     "<h2>Construction support from planning to handover</h2><p>We help clients move from idea to execution with clear scope, practical sequencing and site coordination that keeps every decision visible.</p><ul><li>Residential, commercial, renovation and interior work</li><li>Progress-focused coordination with contractors and site teams</li><li>Quality checks for materials, finishing and handover readiness</li></ul>"
@@ -40,7 +40,7 @@ export const fallbackPageContent = {
   },
   gallery: {
     title: "Project images and construction highlights.",
-    seoDescription: "Explore recently published gallery images from tanuenterprise projects.",
+    seoDescription: "Explore recently published gallery images from Tanushree Infrastructure projects.",
     content:
       "<h2>Visual progress from site to finish</h2><p>The gallery brings together construction progress, finished details, materials and site moments so visitors can quickly understand the quality and range of work.</p>"
   },

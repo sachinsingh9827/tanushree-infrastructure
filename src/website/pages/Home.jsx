@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useGetPageQuery } from "../../store/websiteApi.js";
 import { fallbackHomeContent, fallbackPageContent } from "../data/staticContent.js";
 import SiteLayout from "../components/SiteLayout.jsx";
+import { applyBrandName } from "../utils/brandContent.js";
 
 const stats = [
   ["6+", "Core Services"],
@@ -145,9 +146,9 @@ export default function Home() {
   const { data, isError, isLoading } = useGetPageQuery("home");
   const page = data?.data || (isError ? fallbackPageContent.home : null);
   const heroTitle = page?.title || fallbackHomeContent.title;
-  const heroDescription = page?.seoDescription || fallbackHomeContent.description;
+  const heroDescription = applyBrandName(page?.seoDescription || fallbackHomeContent.description);
   const heroImage = page?.heroImage?.url || fallbackHomeContent.image;
-  const cmsContent = page?.content || fallbackHomeContent.content;
+  const cmsContent = applyBrandName(page?.content || fallbackHomeContent.content);
   const planningImage = page?.sectionImages?.planning?.url || fallbackSectionImages.planning;
   const whyImage = page?.sectionImages?.why?.url || fallbackSectionImages.why;
   const workflowImage = page?.sectionImages?.workflow?.url || fallbackSectionImages.workflow;
@@ -268,7 +269,7 @@ export default function Home() {
 
       <section className="relative overflow-hidden bg-primary py-14 text-white lg:min-h-screen">
         <SmoothBackgroundImage
-          alt={page?.sectionImages?.why?.altText || "Why choose tanuenterprise"}
+          alt={page?.sectionImages?.why?.altText || "Why choose Tanushree Infrastructure"}
           direction="left"
           src={whyImage}
         />
@@ -280,7 +281,7 @@ export default function Home() {
             <p className="text-sm font-semibold uppercase tracking-wide text-secondary">Why Choose Us</p>
             <h2 className="mt-2 text-4xl font-extrabold leading-tight text-white md:text-5xl">Construction work that stays clear from start to finish.</h2>
             <p className="mt-4 leading-7 text-slate-100">
-              The home page now gives visitors a stronger picture of what tanuenterprise does, how the team works and how to start a project conversation.
+              Tanushree Infrastructure delivers construction, renovation and interior projects with clear communication and dependable planning.
             </p>
           </div>
           <div className="grid gap-5">

@@ -17,8 +17,12 @@ export default function SiteLayout({ children }) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: homeData } = useGetHomeQuery();
-  const contactPhone = homeData?.data?.settings?.phone || "+91 7489887978";
-  const supportEmail = homeData?.data?.settings?.email;
+  const settings = homeData?.data?.settings;
+  const contactPhone = settings?.phone && !settings.phone.includes("00000") ? settings.phone : "+91 7489887978";
+  const supportEmail = settings?.email && !settings.email.toLowerCase().includes("@tanuenterprise.com") ? settings.email : "";
+  const companyName = settings?.companyName && !["tanuenterprise", "Tanu Enterprise"].includes(settings.companyName)
+    ? settings.companyName
+    : "Tanushree Infrastructure";
 
   return (
     <main className="flex min-h-screen flex-col bg-stone-50 text-slate-950 transition-colors dark:bg-slate-950 dark:text-white">
@@ -33,12 +37,12 @@ export default function SiteLayout({ children }) {
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
           <Link className="flex min-w-0 flex-1 items-center md:flex-none" onClick={() => setMobileMenuOpen(false)} to="/">
             <img
-              alt="tanuenterprise"
+              alt="Tanushree Infrastructure"
               className="h-12 w-auto max-w-[160px] object-contain sm:hidden"
               src="/assets/logo/mobilelogo.svg"
             />
             <img
-              alt="tanuenterprise"
+              alt="Tanushree Infrastructure"
               className="hidden h-16 w-auto max-w-[280px] object-contain sm:block"
               src="/assets/logo/deshtoplogo.svg"
             />
@@ -129,7 +133,7 @@ export default function SiteLayout({ children }) {
         <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
           <div>
             <img
-              alt="tanuenterprise"
+              alt="Tanushree Infrastructure"
               className="h-16 w-auto max-w-[280px] object-contain"
               src="/assets/logo/deshtoplogo.svg"
             />
@@ -156,7 +160,7 @@ export default function SiteLayout({ children }) {
           </div>
         </div>
         <div className="border-t border-white/10 px-4 py-4 text-center text-xs text-slate-400">
-          Copyright 2026 tanuenterprise. All rights reserved.
+          Copyright 2026 {companyName}. All rights reserved.
         </div>
       </footer>
     </main>

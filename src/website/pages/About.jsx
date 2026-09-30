@@ -2,10 +2,17 @@ import { useGetPageQuery } from "../../store/websiteApi.js";
 import { fallbackAboutPage } from "../data/staticContent.js";
 import PageHero from "../components/PageHero.jsx";
 import SiteLayout from "../components/SiteLayout.jsx";
+import { applyBrandName } from "../utils/brandContent.js";
 
 export default function About() {
   const { data, isError, isLoading } = useGetPageQuery("about");
-  const page = data?.data || (isError ? fallbackAboutPage : null);
+  const rawPage = data?.data || (isError ? fallbackAboutPage : null);
+  const page = rawPage ? {
+    ...rawPage,
+    title: applyBrandName(rawPage.title),
+    seoDescription: applyBrandName(rawPage.seoDescription),
+    content: applyBrandName(rawPage.content)
+  } : null;
   const hasCmsContent = Boolean(page?.content);
 
   return (
@@ -15,14 +22,14 @@ export default function About() {
         title={page?.title || "Construction work planned with discipline and delivered with care."}
         description={
           page?.seoDescription ||
-          "tanuenterprise manages residential, commercial and renovation projects with practical execution, clear communication and reliable timelines."
+          "Tanushree Infrastructure manages residential, commercial and renovation projects with practical execution, clear communication and reliable timelines."
         }
       />
 
       {page?.heroImage?.url ? (
         <section className="mx-auto max-w-6xl px-4 pt-10">
           <img
-            alt={page.heroImage.altText || page.title || "About tanuenterprise"}
+            alt={page.heroImage.altText || page.title || "About Tanushree Infrastructure"}
             className="max-h-[420px] w-full rounded-lg object-cover shadow"
             loading="lazy"
             src={page.heroImage.url}

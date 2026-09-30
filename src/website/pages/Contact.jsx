@@ -1,25 +1,33 @@
 import { Building2, Mail, MapPin, Phone, Send } from "lucide-react";
 import { useState } from "react";
-import { useGetPageQuery, useSubmitContactMutation } from "../../store/websiteApi.js";
+import { useGetHomeQuery, useGetPageQuery, useSubmitContactMutation } from "../../store/websiteApi.js";
 import { useToast } from "../../context/ToastContext.jsx";
 import CustomSelect from "../../components/CustomSelect.jsx";
 import { fallbackPageContent } from "../data/staticContent.js";
 import SiteLayout from "../components/SiteLayout.jsx";
-
-const contactCards = [
-  { icon: Phone, label: "Call", value: "+91 00000 00000" },
-  { icon: Mail, label: "Email", value: "info@tanuenterprise.com" },
-  { icon: MapPin, label: "Visit", value: "Project office, India" }
-];
+import { applyBrandName } from "../utils/brandContent.js";
 
 const customerTypes = ["Owner", "Builder", "Architect", "Contractor", "Business", "Other"];
 
 export default function Contact() {
   const { showToast } = useToast();
+  const { data: homeData } = useGetHomeQuery();
   const { data, isError } = useGetPageQuery("contact");
   const [submitContact, { isLoading }] = useSubmitContactMutation();
-  const page = data?.data || (isError ? fallbackPageContent.contact : null);
+  const rawPage = data?.data || (isError ? fallbackPageContent.contact : null);
+  const page = rawPage ? {
+    ...rawPage,
+    title: applyBrandName(rawPage.title),
+    seoDescription: applyBrandName(rawPage.seoDescription),
+    content: applyBrandName(rawPage.content)
+  } : null;
   const heroImage = page?.heroImage?.url || fallbackPageContent.contact.heroImage.url;
+  const settings = homeData?.data?.settings;
+  const contactCards = [
+    { icon: Phone, label: "Call", value: settings?.phone && !settings.phone.includes("00000") ? settings.phone : "+91 7489887978" },
+    ...(settings?.email && !settings.email.toLowerCase().includes("@tanuenterprise.com") ? [{ icon: Mail, label: "Support email", value: settings.email }] : []),
+    { icon: MapPin, label: "Visit", value: settings?.address || "Project office, India" }
+  ];
 
   const [formValues, setFormValues] = useState({
     name: "",
@@ -74,7 +82,7 @@ export default function Contact() {
               <div>
                 <p className="mb-3 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-secondary">
                   <Building2 size={16} />
-                  Contact tanuenterprise
+                  Contact Tanushree Infrastructure
                 </p>
                 <h1 className="max-w-xl text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
                   {page?.title || fallbackPageContent.contact.title}

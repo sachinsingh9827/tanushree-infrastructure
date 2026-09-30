@@ -55,7 +55,7 @@ export default function AdminLayout({ children, title }) {
       <div className="flex h-24 items-center justify-center border-b border-slate-200 bg-header px-4 dark:border-slate-800 dark:bg-primary">
         {sidebarCollapsed ? (
           <img
-            alt="tanuenterprise"
+            alt="Tanushree Infrastructure"
             className="h-14 w-14 rounded object-contain"
             onError={(event) => {
               event.currentTarget.hidden = true;
@@ -65,7 +65,7 @@ export default function AdminLayout({ children, title }) {
         ) : (
           <div className="flex min-w-0 flex-1 items-center justify-center">
             <img
-              alt="tanuenterprise"
+            alt="Tanushree Infrastructure"
               className="h-20 w-full max-w-[220px] object-contain"
               onError={(event) => {
                 event.currentTarget.hidden = true;

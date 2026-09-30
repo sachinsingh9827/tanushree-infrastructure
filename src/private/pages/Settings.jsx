@@ -18,9 +18,9 @@ export default function Settings() {
         <Loader label="Loading site settings..." />
       ) : (
         <form className="grid gap-4 rounded-lg bg-white p-5 shadow dark:border dark:border-slate-800 dark:bg-slate-950 md:grid-cols-2" onSubmit={handleSubmit}>
-          <input className="rounded border px-3 py-2" defaultValue={settings?.companyName || ""} name="companyName" placeholder="Company name" />
-          <input className="rounded border px-3 py-2" defaultValue={settings?.email || ""} name="email" placeholder="Support email (shown in footer)" type="email" />
-          <input className="rounded border px-3 py-2" defaultValue={settings?.phone || ""} name="phone" placeholder="Contact phone (shown in footer)" type="tel" />
+          <input className="rounded border px-3 py-2" defaultValue={settings?.companyName && settings.companyName !== "tanuenterprise" ? settings.companyName : "Tanushree Infrastructure"} name="companyName" placeholder="Company name" />
+          <input className="rounded border px-3 py-2" defaultValue={settings?.email && !settings.email.toLowerCase().includes("@tanuenterprise.com") ? settings.email : ""} name="email" placeholder="Support email (shown in footer)" type="email" />
+          <input className="rounded border px-3 py-2" defaultValue={settings?.phone && !settings.phone.includes("00000") ? settings.phone : "+91 7489887978"} name="phone" placeholder="Contact phone (shown in footer)" type="tel" />
           <input className="rounded border px-3 py-2" defaultValue={settings?.alternatePhone || ""} name="alternatePhone" placeholder="Alternate phone" />
           <input className="rounded border px-3 py-2 md:col-span-2" defaultValue={settings?.address || ""} name="address" placeholder="Address" />
           <input className="rounded border px-3 py-2" defaultValue={settings?.facebook || ""} name="facebook" placeholder="Facebook URL" />

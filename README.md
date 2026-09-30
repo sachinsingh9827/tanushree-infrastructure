@@ -1,6 +1,6 @@
-# Tanu Enterprise Frontend
+# Tanushree Infrastructure Frontend
 
-React and Vite frontend for the Tanu Enterprise website and admin panel.
+React and Vite frontend for the Tanushree Infrastructure website and admin panel.
 
 ## Setup
 
